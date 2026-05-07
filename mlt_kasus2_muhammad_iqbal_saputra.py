@@ -87,11 +87,22 @@ ratings_explicit = ratings[ratings['Book-Rating'] > 0]
 # Menggabungkan data rating dan buku berdasarkan ISBN
 df_merged = ratings_explicit.merge(books_clean, on='ISBN', how='inner')
 
-# Pemeriksaan Missing Value pada dataframe yang telah digabungkan
-print("Jumlah Missing Value sebelum ditangani:")
-print(df_merged.isnull().sum())
+# Pengecekan jumlah baris dan kolom
+print("Bentuk data books:", books.shape)
+print("Bentuk data ratings:", ratings.shape)
+print("Bentuk data users:", users.shape)
 
-# Setelah dicek, baru lakukan dropna
+# Pengecekan Missing Value tiap dataset
+print("\nMissing Value Books:\n", books.isnull().sum())
+print("\nMissing Value Ratings:\n", ratings.isnull().sum())
+print("\nMissing Value Users:\n", users.isnull().sum())
+
+# Pengecekan Duplikat tiap dataset
+print("\nDuplikat Books:", books.duplicated().sum())
+print("Duplikat Ratings:", ratings.duplicated().sum())
+print("Duplikat Users:", users.duplicated().sum())
+
+# lakukan dropna
 df_merged = df_merged.dropna()
 
 # Mengambil sampel 10.000 data secara acak untuk efisiensi memori (opsional namun sangat disarankan)
